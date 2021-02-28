@@ -20,23 +20,22 @@
 #include <string.h>
 
 // define
-// #define ESC 27
-// #define TAB 9
-// #define CAPS 
+
 
 
 const byte ROWS = 5; //four rows
 const byte COLS = 13; //four columns
 
+// https://www.arduino.cc/en/Reference/KeyboardModifiers
 
 // the library will return the character inside this array
 // when the appropriate button is pressed.
 char keys[ROWS][COLS] = {
-    {KEY_ESC, '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '+', KEY_BACKSPACE},
+    {KEY_ESC, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '+'},
     {KEY_TAB, 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']'},
     {KEY_CAPS_LOCK,'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', KEY_RETURN},
-    {KEY_LEFT_SHIFT, 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', KEY_RIGHT_SHIFT},
-    {KEY_LEFT_CTRL, '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '+', KEY_BACKSPACE}
+    {KEY_LEFT_SHIFT, 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', KEY_RIGHT_SHIFT, ''},
+    {KEY_LEFT_CTRL, KEY_LEFT_GUI , KEY_LEFT_ALT, '\\', KEY_BACKSPACE, '', ' ', '', '', KEY_RIGHT_ALT, KEY_RIGHT_GUI, '', KEY_RIGHT_CTRL}
 };
 
 byte rowPins[ROWS] = {0, 1, 2, 3, 4}; //connect to the row pinouts of the keypad
@@ -65,7 +64,6 @@ void loop()
 
   if (key)
   {
-    Serial.println(key);
     switch (key)
     {
     case '1':
@@ -118,6 +116,7 @@ void loop()
       // sendMacroCommand('d');
       break;
     }
+    Serial.println(key);
 
     // delay(100);
     Keyboard.releaseAll(); // this releases the buttons
